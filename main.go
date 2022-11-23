@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+  "fmt"
+  "os"
+  "io/ioutil"
+)
 
 func main() {
-  fmt.Println("Hello World")
+  body, _ := ioutil.ReadAll(os.Stdin)
+  t := NewTokenizer(string(body))
+  token := t.Tokenize()
+
+  for token != nil {
+    fmt.Printf("tk: %v \n", token)
+    token = token.Next
+  }
 }
